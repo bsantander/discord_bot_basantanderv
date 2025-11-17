@@ -1,0 +1,19 @@
+{
+    "COMANDOS":{
+        "HOLA_RESPUESTA": "Este es un saludo generico para {usuario}",
+        "PING": "pong {ping:,.2f} ms"
+    },
+    "ERRORES":{
+        "FALTA_PERMISO": ""
+    },
+    "DEPURACION":{
+        "FALTA_COMANDO": "**ERROR**, el comando *{comando}* no existe",
+        "FALTA_VARIABLE": "**ERROR**, la variable de entorno *{variable}* no existe en .env"
+    },
+    "INICIALIZACION":{
+        "ON_READY": "{bot_name} se ha conectado a Discord",
+        "COG_CARGADO": "**{cog}** se ha cargado correctamente",
+        "COG_NO_EXISTE": "No se encontró **{cog}** en el directorio cogs/",
+        "COG_CON_ERROR": "hay un error en **{cog}**, por lo que es imposible cargarlo"
+    }
+}
