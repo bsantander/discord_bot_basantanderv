@@ -15,8 +15,10 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 
 load_messages()
 
+# CARGA DE COGS
+
 async def load_cogs():
-    
+    """Carga los cogs del servidor y luego lanza un mensaje de exito/fallo"""
     try: #Carga de cog SERVIDOR
         cog = "servidor"
         await bot.load_extension('cogs.servidor')
@@ -64,7 +66,7 @@ async def load_cogs():
         )
 
 
-# --- EVENTOS ---
+# EVENTOS
 
 @bot.event
 async def on_ready():
@@ -78,7 +80,7 @@ async def on_ready():
     await load_cogs()
     await bot.change_presence(activity=discord.Game(name="Escribiendo !help"))
 
-# --- COMANDOS ---
+# COMANDOS DE SERVIDOR
 
 @bot.command(name='hola', help='El bot saluda.')
 async def hola(ctx):
@@ -113,15 +115,20 @@ async def ping(ctx):
 
 @bot.command(name='encender', help='Encender el Servidor y panel')
 async def encender(ctx):
+    """Tareas automatizadas para inicio de servidor donde esta el nodo principal"""
+
     servidor = bot.get_cog("ServidorCog")
     if servidor:
         inicio = servidor.iniciar_servidor()
     await ctx.send('Encendiendo panel y servidor...')
+    if inicio:
+        mensaje = get_message(
+            "COMANDOS",
+            "SERVER_INICIADO"
+        )
+        await ctx.send(mensaje)
 
-
-
-# --- COMANDO CON RESTRICCIÓN DE PERMISOS ---
-
+# comando con manejo de permisos como ejemplo de uso
 @bot.command(name='limpiar', help='Elimina una cantidad específica de mensajes. (Requiere el permiso "Manage Messages").')
 @commands.has_permissions(manage_messages=True)
 async def limpiar(ctx, cantidad: int):
@@ -144,9 +151,14 @@ async def limpiar(ctx, cantidad: int):
 async def on_command_error(ctx, error):
     """Maneja errores específicos de comandos, como la falta de permisos."""
     if isinstance(error, commands.MissingPermissions):
+        mensaje = get_message(
+            "ERRORES",
+            "FALTA_PERMISO",
+            usuario = ctx.author.display_name,
+            permiso = ", ".join(error.missing_permissions)
+        )
         await ctx.send(
-            f'Lo siento, {ctx.author.display_name}. No tienes los permisos necesarios '
-            f'({", ".join(error.missing_permissions)}) para usar este comando.',
+            mensaje,
             delete_after=10
         )
     else:

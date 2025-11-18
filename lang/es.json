@@ -1,10 +1,11 @@
 {
     "COMANDOS":{
         "HOLA_RESPUESTA": "Este es un saludo generico para {usuario}",
-        "PING": "pong {ping:,.2f} ms"
+        "PING": "Pong {ping:,.2f} ms",
+        "SERVER_INICIADO": "Panel y servidor encendidos"
     },
     "ERRORES":{
-        "FALTA_PERMISO": ""
+        "FALTA_PERMISO": "Lo siento, {usuario}, no tienes el permiso {permiso} para ejecutar este comando"
     },
     "DEPURACION":{
         "FALTA_COMANDO": "**ERROR**, el comando *{comando}* no existe",
