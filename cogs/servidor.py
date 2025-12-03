@@ -10,7 +10,6 @@ class ServidorCog(commands.Cog):
         self.bot = bot        
 
     async def _ping_to_server(self, ip_address):
-        
         comando = ["ping", "-c 1", ip_address]
 
         try:
@@ -32,9 +31,7 @@ class ServidorCog(commands.Cog):
             return False
 
     async def comprobar_encendido_servidor(self):
-        
         ip = os.getenv('SERVER_IP')
-
         if not ip:
             mensaje = get_message(
                 "DEPURACION",
@@ -54,7 +51,7 @@ class ServidorCog(commands.Cog):
             mac = os.getenv('SERVER_MAC')
             if mac:
                 wakeonlan.send_magic_packet(mac)
-                return True
+                return 
             else:
                 mensaje = get_message(
                     "DEPURACION",
@@ -62,7 +59,7 @@ class ServidorCog(commands.Cog):
                     variable = "SERVER_MAC"
                 )
                 print(mensaje)
-        return False
+        return 
 
 async def setup(bot):
     await bot.add_cog(ServidorCog(bot))

@@ -11,7 +11,7 @@ intents = discord.Intents.default()
 intents.message_content = True # NECESARIO para leer el contenido de los mensajes de comandos con prefijo (ej: !hola)
 intents.members = True         # Si necesitas interactuar con miembros (ej: dar roles, o usar ciertos permisos)
 
-bot = commands.Bot(command_prefix='!', intents=intents)
+bot = commands.Bot(command_prefix='/', intents=intents)
 
 load_messages()
 
@@ -113,6 +113,7 @@ async def ping(ctx):
     )
     await ctx.send(mensaje)
 
+
 @bot.command(name='encender', help='Encender el Servidor y panel')
 async def encender(ctx):
     """Tareas automatizadas para inicio de servidor donde esta el nodo principal"""
@@ -127,6 +128,17 @@ async def encender(ctx):
             "SERVER_INICIADO"
         )
         await ctx.send(mensaje)
+    else:
+        mensaje = get_message(
+            "COMANDOS",
+            "SERVER_NO_INICIADO"
+        )
+
+@bot.command(name='estado', help='Comprueba el estado del servidor, si este esta encendido o apagado')
+async def estado(ctx):
+    """Entrega mensaje de estado de servidor, si este esta encendido o no"""
+    estadoServidor = bot.get_cog("ServidorCog")
+
 
 # comando con manejo de permisos como ejemplo de uso
 @bot.command(name='limpiar', help='Elimina una cantidad específica de mensajes. (Requiere el permiso "Manage Messages").')
