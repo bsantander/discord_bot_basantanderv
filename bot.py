@@ -25,21 +25,21 @@ async def load_cogs():
         mensaje = get_message(
             "INICIALIZACION",
             "COG_CARGADO",
-            cog
+            cogs = cog
         )
         print(mensaje)
     except commands.ExtensionNotFound:
         mensaje = get_message(
             "INICIALIZACION",
             "COG_NO_EXISTE",
-            cog
+            cogs = cog
         )  
         print(mensaje)
     except commands.ExtensionError:
         mensaje = get_message(
             "INICIALIZACION",
             "COG_CON_ERROR",
-            cog
+            cogs = cog
         )  
 
     try: #Carga de cog MINECRAFT
@@ -48,21 +48,21 @@ async def load_cogs():
         mensaje = get_message(
             "INICIALIZACION",
             "COG_CARGADO",
-            cog
+            cogs = cog
         )
         print(mensaje)
     except commands.ExtensionNotFound:
         mensaje = get_message(
             "INICIALIZACION",
             "COG_NO_EXISTE",
-            cog
+            cogs = cog
         )  
         print(mensaje)
     except commands.ExtensionError:
         mensaje = get_message(
             "INICIALIZACION",
             "COG_CON_ERROR",
-            cog
+            cogs = cog
         )
 
 

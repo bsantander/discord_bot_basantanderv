@@ -2,7 +2,8 @@
     "COMANDOS":{
         "HOLA_RESPUESTA": "Este es un saludo generico para {usuario}",
         "PING": "Pong {ping:,.2f} ms",
-        "SERVER_INICIADO": "Panel y servidor encendidos"
+        "SERVER_INICIADO": "Panel y servidor encendidos",
+        "SERVER_NO_INICIADO": "Hubo un error y no se pudo iniciar el nodo de servidor"
     },
     "ERRORES":{
         "FALTA_PERMISO": "Lo siento, {usuario}, no tienes el permiso {permiso} para ejecutar este comando"
@@ -13,8 +14,8 @@
     },
     "INICIALIZACION":{
         "ON_READY": "{bot_name} se ha conectado a Discord",
-        "COG_CARGADO": "**{cog}** se ha cargado correctamente",
-        "COG_NO_EXISTE": "No se encontró **{cog}** en el directorio cogs/",
-        "COG_CON_ERROR": "hay un error en **{cog}**, por lo que es imposible cargarlo"
+        "COG_CARGADO": "**{cogs}** se ha cargado correctamente",
+        "COG_NO_EXISTE": "No se encontró **{cogs}** en el directorio cogs/",
+        "COG_CON_ERROR": "hay un error en **{cogs}**, por lo que es imposible cargarlo"
     }
 }
