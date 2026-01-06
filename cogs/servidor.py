@@ -1,65 +1,54 @@
-import asyncio
-import os
-import subprocess
+import discord
+from discord import app_commands
 from discord.ext import commands
-import wakeonlan
-from ..utils.messages import get_message
+from utils.messages import get_message
+import utils.node_server as ns
 
 class ServidorCog(commands.Cog):
+    
+    # Funcion de carga del cog
+
     def __init__(self, bot):
         self.bot = bot        
 
-    async def _ping_to_server(self, ip_address):
-        comando = ["ping", "-c 1", ip_address]
-
-        try:
-            resultado = subprocess.run(
-                comando,
-                capture_output=True,
-                check=False,
-                text=True
-            )
-            return resultado.returncode == 0
+    @app_commands.command(name="encender", description="Encender nodo servidor.")
+    async def encendido_nodo(self, interaction: discord.Interaction):
         
-        except FileNotFoundError:
-            mensaje = get_message(
-                "DEPURACION",
-                "FALTA_COMANDO",
-                comando = "ping"
-            )
-            print(mensaje)
-            return False
-
-    async def comprobar_encendido_servidor(self):
-        ip = os.getenv('SERVER_IP')
-        if not ip:
-            mensaje = get_message(
-                "DEPURACION",
-                "FALTA_VARIABLE",
-                variable = "SERVER_IP"
-            )
-            print(mensaje)
-            return False
+        msg = get_message(
+            "COMANDOS",
+            "ENCENDIENDO_NODO"
+        )
+        await interaction.response.send_message(msg)
         
-        esta_encendido = await asyncio.to_thread(self._ping_to_server, ip)
-        return esta_encendido
+        estado = await ns.iniciar_servidor()
+
+        if estado == "SUCCESS":
+            msg = get_message(
+                "COMANDOS",
+                "SERVER_INICIADO"
+            )
+        elif estado == "SERVER_ON":
+            msg = get_message(
+                "COMANDOS",
+                "SERVER_ON"
+
+            )
+        else:
+            msg = get_message(
+                "ERRORES",
+                "SERVER_NO_INICIADO"
+
+            )
+
+        await interaction.edit_original_response(content=msg)
+
+    @app_commands.command(name="apagar", description="Apagar el nodo servidor.")
+    async def apagado_nodo(self, interaction: discord.Interaction):
+        await interaction.response.defer(ephemeral=True)
+        resultado = await ns.comando_a_nodo("sudo /usr/sbin/shutdown now")   
+        
+        await interaction.edit_original_response(content=f"**Resultado:**\n```bash\n{resultado}```")
+
     
-
-
-    async def iniciar_servidor(self):
-        if not await self.comprobar_encendido_servidor():
-            mac = os.getenv('SERVER_MAC')
-            if mac:
-                wakeonlan.send_magic_packet(mac)
-                return 
-            else:
-                mensaje = get_message(
-                    "DEPURACION",
-                    "FALTA_VARIABLE",
-                    variable = "SERVER_MAC"
-                )
-                print(mensaje)
-        return 
-
 async def setup(bot):
     await bot.add_cog(ServidorCog(bot))

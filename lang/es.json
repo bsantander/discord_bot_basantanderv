@@ -2,13 +2,17 @@
     "COMANDOS":{
         "HOLA_RESPUESTA": "Este es un saludo generico para {usuario}",
         "PING": "Pong {ping:,.2f} ms",
+        "ENCENDIENDO_NODO": "Encendiendo nodo Servidor...",
         "SERVER_INICIADO": "Panel y servidor encendidos",
-        "SERVER_NO_INICIADO": "Hubo un error y no se pudo iniciar el nodo de servidor"
+        "SERVER_ON": "Nodo servidor ya encendido."
     },
     "ERRORES":{
-        "FALTA_PERMISO": "Lo siento, {usuario}, no tienes el permiso {permiso} para ejecutar este comando"
+        "FALTA_PERMISO": "Lo siento, {usuario}, no tienes el permiso {permiso} para ejecutar este comando",
+        "SERVER_NO_INICIADO": "Hubo un error y no se pudo iniciar el nodo de servidor"
     },
     "DEPURACION":{
+        "ENVIAR_M_PACKET": "enviando magic packet...",
+        "ENVIADO_M_PACKET": "Magic packet enviado.",
         "FALTA_COMANDO": "**ERROR**, el comando *{comando}* no existe",
         "FALTA_VARIABLE": "**ERROR**, la variable de entorno *{variable}* no existe en .env"
     },
