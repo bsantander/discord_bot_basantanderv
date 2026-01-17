@@ -75,7 +75,7 @@ async def comando_a_nodo(comando, hostname=None, user=None, key_path=None):
     
     print(f"DEBUG: Host={hostname}, User={user}, Key={key_path}")
     try:
-        async with asyncssh.connect(host=hostname, username=user, client_keys=[key_path]) as connection:
+        async with asyncssh.connect(host=hostname, username=user, client_keys=[key_path], known_hosts= None) as connection:
             resultado = await connection.run(comando, check=True)
             return resultado.stdout.strip()
 
