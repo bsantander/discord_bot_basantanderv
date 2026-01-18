@@ -51,6 +51,7 @@ class MyBot(commands.Bot):
 
         self.tree.copy_global_to(guild=MY_GUILD)
         await self.tree.sync(guild=MY_GUILD)
+        print("Done")
 
 
     async def on_ready(self):
